@@ -11,7 +11,7 @@ else{
 // Q7 Has your patient used any of the following medications in the past 3 months != 0 and != 10
 var gp_med_history = 0;
 var splitted = "{gp_meds01}".split(';');
-if (splitted.indexOf("10") <= -1 || splitted.indexOf("0") <= -1) {
+if (splitted.indexOf("10") <= -1 & splitted.indexOf("0") <= -1) {
  gp_med_history = 1;
 } else {
  gp_med_history = 0;
