@@ -29,7 +29,7 @@ else{
 
 // PHQ 2 = 0
 var phd2 = 0;
-if ({Calcphq} == 0){
+if ({phq_2_score} < 3){
     phd2 += 1;
 }
 else{
