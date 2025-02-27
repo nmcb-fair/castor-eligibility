@@ -84,7 +84,7 @@ else if (splitted.indexOf("17") == 1 && {astma_bronchitis} == 1) { // astma
 }
 
 // Medication, except for antiviral, antibiotics, opiod and vaccinations. 
-// These are added to a separate calculation.
+// These are added to a separate calculation, "eligible_later.js".
 var medi = 1; // default is inclusion, unless
 var splitted = "{meds01}".split(';');
 var splitted_ad = "{Antidepressant_name}".split(';');
@@ -95,6 +95,12 @@ if (splitted.indexOf("10") == 1) { // antidepressant
     // Amitriptyline to Tranylcypromine (option group value 11 to 23)
     if (min_value >= 11 && max_value <= 23) {
         medi = 0;
+    }
+    else if (splitted.indexOf("5") == 1) { // opioid
+    	// medication (to) stop(ped)?
+    	if ({Opioids_stop} == 0) {		
+    		medi = 0;
+    	}
     }
 }
 
