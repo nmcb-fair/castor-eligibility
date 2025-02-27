@@ -106,12 +106,12 @@ else if (splitted.indexOf("10") == 1) { // antidepressant
         medi = 0;
     }
 }
-
-// To be determined:
-// - immunosupresiva
-// - anti-psychotica
-// - andere pijnmedicatie
-// - therapeutic steriods
+else if (splitted.indexOf("13") == 1) { // antipsychotics
+	// medication (to) stop(ped)?
+	if ({Antipsychotics_stop} == 1) {		
+		medi = 0;
+	}
+}
 
 // Is participant eligible? 
 var eligible_participation = 0;
