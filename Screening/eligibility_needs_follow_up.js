@@ -10,11 +10,5 @@ if (splitted.indexOf("9") == 1) { // other medication
 		eligibility_fu = 1;
 	}
 }
-else if (splitted.indexOf("11") == 1) { // other pain medication
-	// medication (to) stop(ped)?
-	if ({Other_stop} == 0) {		
-		eligibility_fu = 1;
-	}
-}
 
 eligibility_fu;
