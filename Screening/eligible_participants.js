@@ -6,12 +6,6 @@ if ({self_bmi} < 40) {
     bmi = 1;
 }
 
-// Pregnant and breastfeeding is none
-var preg_or_brstf = 1;
-if ({sex} != 0 && {pregbrstfeed} == 1) {
-    preg_or_brstf = 0;
-}
-
 // Calccageaid = No
 var cageaid = 0;
 if ({calccageaid} == 0) {
@@ -115,7 +109,7 @@ else if (splitted.indexOf("13") == 1) { // antipsychotics
 
 // Is participant eligible? 
 var eligible_participation = 0;
-if (bmi + preg_or_brstf + cageaid + phq2 + gmh_dia + medi == 6) {
+if (bmi + cageaid + phq2 + gmh_dia + medi == 5) {
     eligible_participation = 1;
 }
 
