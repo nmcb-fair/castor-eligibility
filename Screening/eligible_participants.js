@@ -78,9 +78,6 @@ else if (splitted.indexOf("17") == 1 && {astma_bronchitis} == 1) { // astma
 // These are added to a separate calculation, "eligible_later.js".
 var medi = 1; // default is inclusion, unless
 var splitted = "{meds01}".split(';');
-var splitted_ad = "{Antidepressant_name}".split(';');
-var min_value = Math.min.apply(null, splitted_ad);
-var max_value = Math.max.apply(null, splitted_ad);
 
 if (splitted.indexOf("3") == 1) { // antiviral
     // medication (to) stop(ped)?
@@ -95,8 +92,8 @@ else if (splitted.indexOf("5") == 1) { // opioid
     }
 }
 else if (splitted.indexOf("10") == 1) { // antidepressant            
-    // Amitriptyline to Tranylcypromine (option group value 11 to 23)
-    if (min_value >= 11 && max_value <= 23) {
+    // Tricyclic antidepressants
+    if ({antidepressant_tricyclic} == 1) {
         medi = 0;
     }
 }
