@@ -23,10 +23,10 @@ if (({phq_2_score} <= 4 && {meds01} != 10) || ({phq_2_score} <= 2 && {meds01} ==
 var gmh_dia = 1; // default is inclusion, unless
 var splitted = "{gmh_diagnosis02}".split(';');
 
-if (splitted.indexOf("1") == 1) { // graves
+if (splitted.indexOf("1") > -1) { // graves
     gmh_dia = 0;
 }
-else if (splitted.indexOf("2") == 1 ) { // cancer
+else if (splitted.indexOf("2") > -1 ) { // cancer
     if ({Cancer} == 1 ) {
         gmh_dia = 0;
     }
@@ -34,43 +34,43 @@ else if (splitted.indexOf("2") == 1 ) { // cancer
         gmh_dia = 0;
     }
 }
-else if (splitted.indexOf("3") == 1) { // diabetes
+else if (splitted.indexOf("3") > -1) { // diabetes
     gmh_dia = 0;
 }
-else if (splitted.indexOf("4") == 1 && {Kidney} == 1) { // kidney disease
+else if (splitted.indexOf("4") > -1 && {Kidney} == 1) { // kidney disease
     gmh_dia = 0;
 }
-else if (splitted.indexOf("5") == 1) { // cardiovascular
+else if (splitted.indexOf("5") > -1) { // cardiovascular
     gmh_dia = 0;
 }
-else if (splitted.indexOf("6") == 1) { // stroke, TIA
+else if (splitted.indexOf("6") > -1) { // stroke, TIA
     gmh_dia = 0;
 }
-else if (splitted.indexOf("7") == 1 && {Other_breathing} == 1) { // other resp. condition
+else if (splitted.indexOf("7") > -1 && {Other_breathing} == 1) { // other resp. condition
     gmh_dia = 0;
 }
-else if (splitted.indexOf("8") == 1) { // neurological condition
+else if (splitted.indexOf("8") > -1) { // neurological condition
     gmh_dia = 0;
 }
-else if (splitted.indexOf("9") == 1) { // psychological condition
+else if (splitted.indexOf("9") > -1) { // psychological condition
     gmh_dia = 0;
 }
-else if (splitted.indexOf("10") == 1) { // CNS infection
+else if (splitted.indexOf("10") > -1) { // CNS infection
     gmh_dia = 0;
 }
-else if (splitted.indexOf("12") == 1) { // chronic inflamation
+else if (splitted.indexOf("12") > -1) { // chronic inflamation
     gmh_dia = 0;
 }
-else if (splitted.indexOf("13") == 1) { // chronic infection
+else if (splitted.indexOf("13") > -1) { // chronic infection
     gmh_dia = 0;
 }
-else if (splitted.indexOf("15") == 1) { // leukemia
+else if (splitted.indexOf("15") > -1) { // leukemia
     gmh_dia = 0;
 }
-else if (splitted.indexOf("16") == 1) { // anemia
+else if (splitted.indexOf("16") > -1) { // anemia
     gmh_dia = 0;
 }
-else if (splitted.indexOf("17") == 1 && {astma_bronchitis} == 1) { // astma
+else if (splitted.indexOf("17") > -1 && {astma_bronchitis} == 1) { // astma
     gmh_dia = 0;
 }
 
@@ -79,25 +79,25 @@ else if (splitted.indexOf("17") == 1 && {astma_bronchitis} == 1) { // astma
 var medi = 1; // default is inclusion, unless
 var splitted = "{meds01}".split(';');
 
-if (splitted.indexOf("3") == 1) { // antiviral
+if (splitted.indexOf("3") > -1) { // antiviral
     // medication (to) stop(ped)?
     if ({Antiviral_stop} == 0) {		
         medi = 0;
     }
 }
-else if (splitted.indexOf("5") == 1) { // opioid
+else if (splitted.indexOf("5") > -1) { // opioid
     // medication (to) stop(ped)?
     if ({Opioids_stop} == 0) {		
         medi = 0;
     }
 }
-else if (splitted.indexOf("10") == 1) { // antidepressant            
+else if (splitted.indexOf("10") > -1) { // antidepressant            
     // Tricyclic antidepressants
     if ({antidepressant_tricyclic} == 1) {
         medi = 0;
     }
 }
-else if (splitted.indexOf("13") == 1) { // antipsychotics
+else if (splitted.indexOf("13") > -1) { // antipsychotics
 	// medication (to) stop(ped)?
 	if ({Antipsychotics_stop} == 1) {		
 		medi = 0;
