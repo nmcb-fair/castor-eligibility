@@ -15,7 +15,7 @@ if ({calccageaid} == 0) {
 // PHQ 2 = 0
 var phq2 = 0;
 // phq score of 4 or lower, or antidepressant and score of 2 or lower
-if ({phq_2_score} <= 4 || ({phq_2_score} <= 2 && {meds01} == 10)) { 
+if (({phq_2_score} <= 4 && {meds01} != 10) || ({phq_2_score} <= 2 && {meds01} == 10)) { 
     phq2 = 1;
 }
 
