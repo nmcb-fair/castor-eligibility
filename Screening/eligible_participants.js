@@ -77,31 +77,19 @@ else if (splitted.indexOf("17") > -1 && {astma_bronchitis} == 1) { // astma
 // Medication, except for antiviral, antibiotics, opiod and vaccinations. 
 // These are added to a separate calculation, "eligible_later.js".
 var medi = 1; // default is inclusion, unless
-var splitted = "{meds01}".split(';');
+var splitted_meds = "{meds01}".split(';');
 
-if (splitted.indexOf("3") > -1) { // antiviral
-    // medication (to) stop(ped)?
-    if ({Antiviral_stop} == 0) {		
-        medi = 0;
-    }
+if (splitted_meds.indexOf("3") > -1 && {Antiviral_stop} == 0) { // antiviral and medication (to) stop(ped)?		
+	medi = 0;
 }
-else if (splitted.indexOf("5") > -1) { // opioid
-    // medication (to) stop(ped)?
-    if ({Opioids_stop} == 0) {		
-        medi = 0;
-    }
+else if (splitted_meds.indexOf("5") > -1 && {Opioids_stop} == 0) { // opioid and medication (to) stop(ped)?		
+    medi = 0;
 }
-else if (splitted.indexOf("10") > -1) { // antidepressant            
-    // Tricyclic antidepressants
-    if ({antidepressant_tricyclic} == 1) {
-        medi = 0;
-    }
+else if (splitted_meds.indexOf("10") > -1 && {antidepressant_tricyclic} == 1) { // antidepressant and tricyclic?		        
+   medi = 0;
 }
-else if (splitted.indexOf("13") > -1) { // antipsychotics
-	// medication (to) stop(ped)?
-	if ({Antipsychotics_stop} == 1) {		
-		medi = 0;
-	}
+else if (splitted_meds.indexOf("13") > -1 && {Antipsychotics_stop} == 0) { // antipsychotics and medication (to) stop(ped)?	
+	medi = 0;
 }
 
 // Is participant eligible? 
