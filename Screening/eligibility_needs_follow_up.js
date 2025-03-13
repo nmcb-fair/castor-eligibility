@@ -10,7 +10,12 @@ if (splitted.indexOf("2") > -1) { // antibiotics
 		eligibility_fu = 1;
 	}
 }
-
+else if (splitted.indexOf("8") > -1 ) { // therapeutic steroids
+	// medication (to) stop(ped)?
+	if ({Therapeuticsteriods_stop} == 0) {		
+		eligibility_fu = 1;
+	}
+}
 if (splitted.indexOf("9") > -1) { // other medication
 	// medication (to) stop(ped)?
 	if ({Other_stop} == 0) {		
