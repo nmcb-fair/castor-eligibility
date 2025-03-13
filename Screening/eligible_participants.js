@@ -14,8 +14,9 @@ if ({calccageaid} == 0) {
 
 // PHQ 2 = 0
 var phq2 = 0;
+var splitted = "{meds01}".split(';');
 // phq score of 4 or lower, or antidepressant and score of 2 or lower
-if (({phq_2_score} <= 4 && {meds01} != 10) || ({phq_2_score} <= 2 && {meds01} == 10)) { 
+if (({phq_2_score} <= 4 && !splitted.includes("10")) || ({phq_2_score} <= 2 && splitted.includes("10"))) { 
     phq2 = 1;
 }
 
@@ -79,22 +80,31 @@ else if (splitted.indexOf("17") > -1 && {astma_bronchitis} == 1) { // astma
 var medi = 1; // default is inclusion, unless
 var splitted_meds = "{meds01}".split(';');
 
-if (splitted_meds.indexOf("3") > -1 && {Antiviral_stop} == 0) { // antiviral and medication (to) stop(ped)?		
+if (splitted_meds.indexOf("3") > -1 ) { // antiviral 		
 	medi = 0;
 }
-else if (splitted_meds.indexOf("5") > -1 && {Opioids_stop} == 0) { // opioid and medication (to) stop(ped)?		
+else if (splitted_meds.indexOf("4") > -1 ) { // antiviral 		
+	medi = 0;
+}
+else if (splitted_meds.indexOf("5") > -1 ) { // opioid 		
+    medi = 0;
+}
+else if (splitted_meds.indexOf("8") > -1 ) { // therapeutic steriods 		
+    medi = 0;
+}
+else if (splitted_meds.indexOf("9") > -1 ) { // other	
     medi = 0;
 }
 else if (splitted_meds.indexOf("10") > -1 && {antidepressant_tricyclic} == 1) { // antidepressant and tricyclic?		        
    medi = 0;
 }
-else if (splitted_meds.indexOf("13") > -1 && {Antipsychotics_stop} == 0) { // antipsychotics and medication (to) stop(ped)?	
+else if (splitted_meds.indexOf("13") > -1) { // antipsychotics	
 	medi = 0;
 }
 
 // Is participant eligible? 
 var eligible_participation = 0;
-if (bmi + cageaid + phq2 + gmh_dia + medi == 5) {
+if (bmi + cageaid + phq2 + gmh_dia + medi + {pregbrstfeed} == 5) {
     eligible_participation = 1;
 }
 
