@@ -130,11 +130,11 @@ if (splitted_meds.length > 0) {
         eligible_later = 1;
     }
     if (splitted_meds.indexOf("5") > -1) { // opioid 	
-        if ({ Opioids_stop } == 0) { // medication (to) stop(ped)?		
-            ineligible = 1;
-        }
-        else if ({ Opioids_stop } == 1) { // 		
+         if ({ Opioids_stop } == 1) { // medication (to) stop(ped)?				
             eligible_later = 1;
+        }
+        else if ({ Opioids_stop } == 0) {
+            ineligible = 1;
         }
     }
     if (splitted_meds.indexOf("8") > -1) { // therapeutic steriods 	
@@ -153,7 +153,7 @@ if (splitted_meds.length > 0) {
             eligible_fu = 1;
         }
     }
-    if (splitted_meds.indexOf("10") > -1) {
+    if (splitted_meds.indexOf("10") > -1) { // antidepressants
         // tricyclic antidepressants are ineligible
         if ({ antidepressant_tricyclic } == 1) {
             ineligible = 1;
@@ -162,7 +162,7 @@ if (splitted_meds.length > 0) {
             eligible = 1; // if it's another type of antidepressant
         }
     }
-    if (splitted_meds.indexOf("12") > -1) {
+    if (splitted_meds.indexOf("12") > -1) { // immunosupresiva
         if ({ Immunosupresiva_stop } == 1) { // medication (to) stop(ped)?		       
             eligible_later = 1;
         }
