@@ -123,7 +123,7 @@ if (splitted_meds.length > 0) {
             eligible_later = 1;
         }
         else if ({ Antiviral_stop } == 0) {
-            eligible_fu = 1;
+            ineligible = 1;
         }
     }
     if (splitted_meds.indexOf("4") > -1) { // vaccines 			
