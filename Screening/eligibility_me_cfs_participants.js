@@ -27,7 +27,7 @@ else {
 
 // PHQ 2 
 // phq score of 3 or lower, or antidepressant and score of 2 or lower
-if ({ phq_2_score } <= 3 || ({ phq_2_score } <= 2 && splitted_meds.includes("10"))) {
+if ({ phq_2_score } <= 4 || ({ phq_2_score } <= 3 && splitted_meds.includes("10"))) {
     eligible = 1;
 }
 else {
