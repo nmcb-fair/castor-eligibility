@@ -1,4 +1,5 @@
 '##allowempty##';
+
 // Eligible conditions for everyone
 
 // default variables
@@ -10,7 +11,7 @@ var splitted_meds = "{meds01}".split(';');
 var splitted_diag = "{gmh_diagnosis02}".split(';');
 
 // BMI
-if ({ self_bmi } >= 40) {
+if ({self_bmi} >= 40) {
     ineligible = 1;
 }
 else {
@@ -18,7 +19,7 @@ else {
 }
 
 // Calccageaid
-if ({ calccageaid } == 1) {
+if ({calccageaid} == 1) {
     ineligible = 1;
 }
 else {
@@ -27,7 +28,10 @@ else {
 
 // PHQ 2 
 // phq score of 3 or lower, or antidepressant and score of 2 or lower
-if ({ phq_2_score } <= 4 || ({ phq_2_score } <= 3 && splitted_meds.includes("10"))) {
+if ({phq_2_score} <= 4 && splitted_meds.indexOf("10") == -1)  {       
+    eligible = 1;
+}
+else if (({phq_2_score} <= 3 && splitted_meds.indexOf("10") > -1)) {
     eligible = 1;
 }
 else {
@@ -36,7 +40,7 @@ else {
 
 
 // Pregnancy and/or breast feeding
-if ({ pregbrstfeed } == 1) {
+if ({pregbrstfeed} == 1) {
     eligible_later = 1;
 }
 else {
@@ -44,7 +48,7 @@ else {
 }
 
 // Current COVID
-if ({ gmh_currcovid } == 1) {
+if ({gmh_currcovid} == 1) {
     eligible_later = 1;
 }
 else {
@@ -67,7 +71,7 @@ if (splitted_diag.length > 0) {
     if (splitted_diag.indexOf("3") > -1) { // diabetes
         ineligible = 1;
     }
-    if (splitted_diag.indexOf("4") > -1 && { Kidney } == 1) { // kidney disease
+    if (splitted_diag.indexOf("4") > -1 && {Kidney} == 1) { // kidney disease
         ineligible = 1;
     }
     if (splitted_diag.indexOf("5") > -1) { // cardiovascular
@@ -76,7 +80,7 @@ if (splitted_diag.length > 0) {
     if (splitted_diag.indexOf("6") > -1) { // stroke, TIA
         ineligible = 1;
     }
-    if (splitted_diag.indexOf("7") > -1 && { Other_breathing } == 1) { // other resp. condition
+    if (splitted_diag.indexOf("7") > -1 && {Other_breathing} == 1) { // other resp. condition
         ineligible = 1;
     }
     if (splitted_diag.indexOf("8") > -1) { // neurological condition
@@ -100,7 +104,7 @@ if (splitted_diag.length > 0) {
     if (splitted_diag.indexOf("16") > -1) { // anemia
         ineligible = 1;
     }
-    if (splitted_diag.indexOf("17") > -1 && { astma_bronchitis } == 1) { // astma
+    if (splitted_diag.indexOf("17") > -1 && {astma_bronchitis} == 1) { // astma
         ineligible = 1;
     }
 }
@@ -111,18 +115,18 @@ else {
 // Medication
 if (splitted_meds.length > 0) {
     if (splitted_meds.indexOf("2") > -1) { // antibiotics	
-        if ({ Antibiotics_stop } == 1) { // medication (to) stop(ped)?	
+        if ({Antibiotics_stop} == 1) { // medication (to) stop(ped)?	
             eligible_later = 1;
         }
-        else if ({ Antibiotics_stop } == 0) {
+        else if ({Antibiotics_stop} == 0) {
             eligible_fu = 1;
         }
     }
     if (splitted_meds.indexOf("3") > -1) { // antiviral 	
-        if ({ Antiviral_stop } == 1) { // medication (to) stop(ped)?	
+        if ({Antiviral_stop} == 1) { // medication (to) stop(ped)?	
             eligible_later = 1;
         }
-        else if ({ Antiviral_stop } == 0) {
+        else if ({Antiviral_stop} == 0) {
             ineligible = 1;
         }
     }
@@ -130,32 +134,32 @@ if (splitted_meds.length > 0) {
         eligible_later = 1;
     }
     if (splitted_meds.indexOf("5") > -1) { // opioid 	
-         if ({ Opioids_stop } == 1) { // medication (to) stop(ped)?				
+         if ({Opioids_stop} == 1) { // medication (to) stop(ped)?				
             eligible_later = 1;
         }
-        else if ({ Opioids_stop } == 0) {
+        else if ({Opioids_stop} == 0) {
             ineligible = 1;
         }
     }
     if (splitted_meds.indexOf("8") > -1) { // therapeutic steriods 	
-        if ({ Therapeuticsteriods_stop } == 1) { // medication (to) stop(ped)?		
+        if ({Therapeuticsteriods_stop} == 1) { // medication (to) stop(ped)?		
             eligible_later = 1;
         }
-        else if ({ Therapeuticsteriods_stop } == 0) {
+        else if ({Therapeuticsteriods_stop} == 0) {
             eligible_fu = 1;
         }
     }
     if (splitted_meds.indexOf("9") > -1) { // other medication	
-        if ({ Other_stop } == 1) { // medication (to) stop(ped)?		
+        if ({Other_stop} == 1) { // medication (to) stop(ped)?		
             eligible_later = 1;
         }
-        else if ({ Other_stop } == 0) {
+        else if ({Other_stop} == 0) {
             eligible_fu = 1;
         }
     }
     if (splitted_meds.indexOf("10") > -1) { // antidepressants
         // tricyclic antidepressants are ineligible
-        if ({ antidepressant_tricyclic } == 1) {
+        if ({antidepressant_tricyclic} == 1) {
             ineligible = 1;
         }
         else {
@@ -163,18 +167,18 @@ if (splitted_meds.length > 0) {
         }
     }
     if (splitted_meds.indexOf("12") > -1) { // immunosupresiva
-        if ({ Immunosupresiva_stop } == 1) { // medication (to) stop(ped)?		       
+        if ({Immunosupresiva_stop} == 1) { // medication (to) stop(ped)?		       
             eligible_later = 1;
         }
-        else if ({ Immunosupresiva_stop } == 0) {
+        else if ({Immunosupresiva_stop} == 0) {
             ineligible = 1;
         }
     }
     if (splitted_meds.indexOf("13") > -1) { // antipsychotics	
-        if ({ Antipsychotics_stop } == 1) { // medication (to) stop(ped)?			
+        if ({Antipsychotics_stop} == 1) { // medication (to) stop(ped)?			
             eligible_later = 1;
         }
-        else if ({ Antipsychotics_stop } == 0) {
+        else if ({Antipsychotics_stop} == 0) {
             ineligible = 1;
         }
     }
