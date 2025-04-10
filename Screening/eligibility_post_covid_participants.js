@@ -39,12 +39,7 @@ if (splitted_diag.length > 0) {
         ineligible = 1;
     }
     if (splitted_diag.indexOf("2") > -1) { // cancer
-        if ({Cancer_2} == 1) {
-            ineligible = 1;
-        }
-        else if ({Cancer2_2} == 0) {
-            ineligible = 1;
-        }
+       eligible_later = 1;
     }
     if (splitted_diag.indexOf("3") > -1) { // diabetes
         ineligible = 1;
