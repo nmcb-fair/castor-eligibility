@@ -8,6 +8,10 @@ var eligible_fu = 0;
 var ineligible = 0;
 var splitted_meds = "{meds01_2}".split(';');
 var splitted_diag = "{gmh_diagnosis02_2}".split(';');
+var splitted_thinner = "{bloodthinners_reason_3}".split(';');
+var splitted_antidep = "{antidepressants_2}".split(';');
+var splitted_tricycl = "{antidepressant_tricyclic_2}".split(';');
+var splitted_antipsy = "{Antipsychotics_name_2}".split(';');
 
 // Calccageaid
 if ({calccageaid_1} == 1) {
@@ -39,21 +43,26 @@ if (splitted_diag.length > 0) {
         ineligible = 1;
     }
     if (splitted_diag.indexOf("2") > -1) { // cancer
-       eligible_later = 1;
+        eligible_fu = 1;
     }
     if (splitted_diag.indexOf("3") > -1) { // diabetes
         ineligible = 1;
     }
-    if (splitted_diag.indexOf("4") > -1 && {Kidney_2} == 1) { // kidney disease
-        ineligible = 1;
+    if (splitted_diag.indexOf("4") > -1) { // kidney disease
+		if ({Kidney_2} == 1) { // less than 50% functional
+			ineligible = 1;
+		}
+		if ({Kidney_2} == 2) { // unsure about functionality
+			eligible_fu = 1;
+		}
     }
     if (splitted_diag.indexOf("5") > -1) { // cardiovascular
         ineligible = 1;
     }
     if (splitted_diag.indexOf("6") > -1) { // stroke, TIA
-        ineligible = 1;
+        eligible_fu = 1;
     }
-    if (splitted_diag.indexOf("7") > -1 && {Other_breathing_2} == 1) { // other resp. condition
+    if (splitted_diag.indexOf("7") > -1) { // other resp. condition
         ineligible = 1;
     }
     if (splitted_diag.indexOf("8") > -1) { // neurological condition
@@ -61,25 +70,33 @@ if (splitted_diag.length > 0) {
     }
     if (splitted_diag.indexOf("9") > -1) { // psychological condition
         ineligible = 1;
-    }
-    if (splitted_diag.indexOf("10") > -1) { // CNS infection
-        ineligible = 1;
-    }
+    }    
     if (splitted_diag.indexOf("12") > -1) { // chronic inflamation
-        ineligible = 1;
+        eligible_fu = 1;
     }
     if (splitted_diag.indexOf("13") > -1) { // chronic infection
-        ineligible = 1;
-    }
-    if (splitted_diag.indexOf("15") > -1) { // leukemia
-        ineligible = 1;
-    }
+        eligible_fu = 1;
+    }    
     if (splitted_diag.indexOf("16") > -1) { // anemia
-        ineligible = 1;
+        eligible_fu = 1;
     }
-    if (splitted_diag.indexOf("17") > -1 && {astma_bronchitis_2} == 1) { // astma
-        ineligible = 1;
+    if (splitted_diag.indexOf("17") > -1) { // astma        
+		if ({astma_bronchitis_2} == 1) { //  more than 2 sorts of pufs
+			ineligible = 1;
+		}
+		else if ({astma_bronchitis_2} == 0) {
+			if ({astma_bronchitis_3} == 1) { // last event more than one month ago
+				eligible = 1;
+			}
+			else if ({astma_bronchitis_3} == 0) {
+				eligible_fu = 1;
+			}
+		}
     }
+	if (splitted_diag.indexOf("18") > -1) { // Cushing or Addison
+        ineligible = 1;
+	}
+
 }
 else {
     eligible = 1;
@@ -87,6 +104,18 @@ else {
 
 // Medication
 if (splitted_meds.length > 0) {
+	if (splitted_meds.indexOf("1") > -1) { // bloodthinner	
+		if (splitted_thinner.indexOf("4") > -1 || splitted_thinner.indexOf("7") > -1 || splitted_thinner.indexOf("6") > -1 || splitted_thinner.indexOf("2") > -1 || splitted_thinner.indexOf("3") > -1) {
+			// pulmonary embolism, thrombosis leg, varicose veins, atrial fibrillation or artificial valve in the heart
+			eligible = 1;
+		}
+		else if (splitted_thinner.indexOf("5") > -1 || splitted_thinner.indexOf("1") > -1) { // heart infarct or stroke
+			ineligible = 1;
+		}
+		else {
+			eligible_fu = 1;
+		}	
+	}
     if (splitted_meds.indexOf("2") > -1) { // antibiotics	
         if ({Antibiotics_stop_2} == 1) { // medication (to) stop(ped)?	
             eligible_later = 1;
@@ -100,7 +129,7 @@ if (splitted_meds.length > 0) {
             eligible_later = 1;
         }
         else if ({Antiviral_stop_2} == 0) {
-            eligible_fu = 1;
+            ineligible = 1;
         }
     }
     if (splitted_meds.indexOf("4") > -1) { // vaccines 			
@@ -132,10 +161,10 @@ if (splitted_meds.length > 0) {
     }
     if (splitted_meds.indexOf("10") > -1) {
         // tricyclic antidepressants are ineligible
-        if ({antidepressant_tricyclic_2} == 1) {
+        if (splitted_tricycl.length > 0) {
             ineligible = 1;
         }
-        else {
+        else if (splitted_antidep.length > 0){
             eligible = 1; // if it's another type of antidepressant
         }
     }
@@ -148,6 +177,12 @@ if (splitted_meds.length > 0) {
         }
     }
     if (splitted_meds.indexOf("13") > -1) { // antipsychotics	
+		if (splitted_antipsy.indexOf("8") == 0 && splitted_antipsy.length > 1) { // any antipsychotics other than "other"
+			ineligible = 1;
+		}		
+		else if (splitted_antipsy.indexOf("8") > -1) { // "other"
+			eligible_fu = 1;
+		}
         if ({Antipsychotics_stop_3} == 1) { // medication (to) stop(ped)?			
             eligible_later = 1;
         }
