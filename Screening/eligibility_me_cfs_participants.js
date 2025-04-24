@@ -46,6 +46,14 @@ else {
     eligible = 1;
 }
 
+// PHQ score
+if ({phq_2_score} > 4) {
+	ineligible = 1;
+}
+else if ({phq_2_score} <= 4) {
+	eligible = 1;
+}
+
 // GMH Diagnosis
 if (splitted_diag.length > 0) {
     if (splitted_diag.indexOf("1") > -1) { // graves
@@ -173,14 +181,9 @@ if (splitted_meds.length > 0) {
         if (splitted_tricycl.length > 0) {
             ineligible = 1;
         }
-        else if (splitted_antidep.length > 0){
-			if ({phq_2_score} <= 4) {
-				ineligible = 1;
-			}
-			else if ({phq_2_score} > 4) {
-				eligible = 1;
-			}
-        }
+		else {
+			eligible = 1;
+		}
     }
     if (splitted_meds.indexOf("12") > -1) {
         if ({Immunosupresiva_stop} == 1) { // medication (to) stop(ped)?		       
