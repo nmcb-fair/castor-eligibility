@@ -29,7 +29,7 @@ if (splitted_diag.indexOf("5") > -1 && splitted_diag.indexOf("0") == -1 && split
 }
 
 // anything but MS
-if (splitted_diag.indexOf("1") > -1 || splitted_diag.indexOf("3") > -1 || splitted_diag.indexOf("4") > -1 || splitted_diag.indexOf("5") > -1) {
+if (splitted_diag.indexOf("2") == -1 || splitted_diag.indexOf("1") > -1 || splitted_diag.indexOf("3") > -1 || splitted_diag.indexOf("4") > -1 || splitted_diag.indexOf("5") > -1) {
 	only_no_ms = true;
 }
 
