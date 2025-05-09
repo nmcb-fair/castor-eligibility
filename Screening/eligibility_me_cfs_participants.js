@@ -178,12 +178,12 @@ if (splitted_meds.length > 0) {
     }
     if (splitted_meds.indexOf("10") > -1) {
         // tricyclic antidepressants are ineligible
-        if (splitted_tricycl.length > 0) {
+        if ({antidepressant_tricyclic} != 'NA') {
             ineligible = 1;
         }
-		else {
-			eligible = 1;
-		}
+        else if ({antidepressants} != 'NA'){
+            eligible = 1; // if it's another type of antidepressant
+        }
     }
     if (splitted_meds.indexOf("12") > -1) {
         if ({Immunosupresiva_stop} == 1) { // medication (to) stop(ped)?		       
