@@ -9,8 +9,6 @@ var ineligible = 0;
 var splitted_meds = "{meds01_1}".split(';');
 var splitted_diag = "{gmh_diagnosis02_1}".split(';');
 var splitted_thinner = "{bloodthinners_reason_2}".split(';');
-var splitted_antidep = "{antidepressants_1}".split(';');
-var splitted_tricycl = "{antidepressant_tricyclic_1}".split(';');
 var splitted_antipsy = "{Antipsychotics_name_1}".split(';');
 
 // BMI
@@ -161,10 +159,10 @@ if (splitted_meds.length > 0) {
     }
     if (splitted_meds.indexOf("10") > -1) {
         // tricyclic antidepressants are ineligible
-        if (splitted_tricycl.length > 0) {
+        if ({antidepressant_tricyclic_1} != 'NA') {
             ineligible = 1;
         }
-        else if (splitted_antidep.length > 0){
+        else if ({antidepressants_1} != 'NA'){
             eligible = 1; // if it's another type of antidepressant
         }
     }
