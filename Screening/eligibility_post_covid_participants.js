@@ -194,7 +194,6 @@ else {
 }
 
 // status codes: 
-// 0 = Ineligible, excluded
 // 1 = Eligible
 // 2 = Eligible later
 // 3 = Eligibility needs follow up
@@ -210,7 +209,7 @@ if (eligible_fu == 1) {
     eligibility_status = 3;
 }
 if (ineligible == 1) {
-    eligibility_status = 0;
+    eligibility_status = 3;
 }
 
 eligibility_status;
