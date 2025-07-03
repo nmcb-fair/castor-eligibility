@@ -39,6 +39,10 @@ if (eligible &&	{dsqsf_cdc_v2_1} == 0 && {dsqsf_ccc_v1_1} == 0 && {dsqsf_iom_v1_
 	category = 1; // healthy control
 }
 
+if (eligible &&	splitted_diag.indexOf("6") > -1) {
+	category = 1; // healthy control
+}
+
 if (eligible && ({dsqsf_cdc_v2_1} == 1 || {dsqsf_ccc_v1_1} == 1 || {dsqsf_iom_v1_1} == 1) && only_no_ms) {
 	category = 2; // ME/CFS
 }
