@@ -122,8 +122,11 @@ for cohort, path in cohort_files.items():
     # Filter extra columns that are present
     extra_present = [col for col in extra_cols if col in df.columns]
 
-    # Combine in desired order
-    existing_cols = first_cols + reason_cols + extra_present
+    # Ensure no duplicates by excluding any columns already in first_cols or reason_cols
+    extra_present_unique = [col for col in extra_present if col not in first_cols + reason_cols]
+
+    # Now build the final column list
+    existing_cols = first_cols + reason_cols + extra_present_unique
 
     # Export to CSV
     df[existing_cols].to_csv(
